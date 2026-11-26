@@ -1,3 +1,5 @@
+
+// --- Animacje elementow podczas przewijania ---
 const cards = document.querySelectorAll('.card, .split-content');
 
 const observer = new IntersectionObserver(
@@ -15,9 +17,11 @@ const observer = new IntersectionObserver(
 
 cards.forEach((card) => observer.observe(card));
 
+
 // --- Stopka widoczna (przypieta) tylko w sekcji Kontakt ---
 const kontaktSection = document.getElementById('kontakt');
 const siteFooter = document.querySelector('.site-footer');
+
 if (kontaktSection && siteFooter) {
   const footerObserver = new IntersectionObserver(
     (entries) => {
@@ -33,8 +37,10 @@ if (kontaktSection && siteFooter) {
   footerObserver.observe(kontaktSection);
 }
 
-// --- Formularz kontaktowy (przykladowa obsluga bez backendu) ---
+
+// --- Formularz kontaktowy ---
 const contactForm = document.querySelector('.contact-form');
+
 if (contactForm) {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -43,7 +49,8 @@ if (contactForm) {
   });
 }
 
-// --- Auto-przesuwajace sie zdjecia w sekcjach z galeria (Historia, Sezonowe) ---
+
+// --- Auto-przesuwajace sie zdjecia w sekcjach z galeria ---
 document.querySelectorAll('.history-media').forEach((media) => {
   const photos = media.querySelectorAll('.history-photo');
   if (photos.length < 2) return;
@@ -54,11 +61,15 @@ document.querySelectorAll('.history-media').forEach((media) => {
 
   function renderDots() {
     if (!dotsWrap) return;
+
     dotsWrap.innerHTML = '';
+
     photos.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.setAttribute('aria-label', `Pokaz zdjecie ${i + 1}`);
+
       if (i === index) dot.classList.add('is-active');
+
       dot.addEventListener('click', () => setIndex(i));
       dotsWrap.appendChild(dot);
     });
@@ -74,6 +85,7 @@ document.querySelectorAll('.history-media').forEach((media) => {
   renderDots();
   setInterval(() => setIndex((index + 1) % photos.length), 3500);
 });
+
 
 // --- Karuzela produktow ---
 const products = [
@@ -121,25 +133,40 @@ function renderCarousel() {
   if (!track) return;
 
   track.innerHTML = '';
+
   products.forEach((product, index) => {
     const slide = document.createElement('div');
     slide.className = 'carousel-slide';
     slide.style.background = `linear-gradient(150deg, ${product.color}, #2b2015)`;
-    if (index === activeIndex) slide.classList.add('is-active');
+
+    if (index === activeIndex) {
+      slide.classList.add('is-active');
+    }
+
+    const visual = product.image
+      ? `<img class="product-image" src="${product.image}" alt="${product.name}">`
+      : `<span class="emoji">${product.emoji}</span>`;
+
     slide.innerHTML = `
-      <span class="emoji">${product.emoji}</span>
+      ${visual}
       <h3>${product.name}</h3>
       <p>${product.desc}</p>
     `;
+
     track.appendChild(slide);
   });
 
   if (dotsWrap) {
     dotsWrap.innerHTML = '';
+
     products.forEach((_, index) => {
       const dot = document.createElement('button');
       dot.setAttribute('aria-label', `Przejdz do produktu ${index + 1}`);
-      if (index === activeIndex) dot.classList.add('is-active');
+
+      if (index === activeIndex) {
+        dot.classList.add('is-active');
+      }
+
       dot.addEventListener('click', () => goToSlide(index));
       dotsWrap.appendChild(dot);
     });
@@ -168,11 +195,18 @@ function resetAutoplay() {
 if (track) {
   renderCarousel();
   resetAutoplay();
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', nextSlide);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', prevSlide);
+  }
 }
 
-// --- Rojowisko pszczol: krolowa i robotnice, ktore czasem ja odwiedzaja ---
+
+// --- Rojowisko pszczol: krolowa i robotnice ---
 const scene = document.querySelector('.scene');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -191,7 +225,9 @@ if (scene && !reduceMotion) {
     el.className = isQueen ? 'scene-bee scene-queen' : 'scene-bee';
     el.textContent = isQueen ? '👑' : '🐝';
     scene.appendChild(el);
+
     const start = randomPoint();
+
     return {
       el,
       x: start.x,
@@ -214,21 +250,24 @@ if (scene && !reduceMotion) {
     bee.wanderUntil = performance.now() + 3000 + Math.random() * 4000;
   }
 
-  pickWanderTarget(queen);
-  workers.forEach(pickWanderTarget);
-
   function moveTowards(bee, factor) {
     const prevX = bee.x;
     bee.x += (bee.targetX - bee.x) * factor;
     bee.y += (bee.targetY - bee.y) * factor;
+
     const flip = bee.targetX < prevX ? -1 : 1;
-    bee.el.style.transform = `translate3d(${bee.x}px, ${bee.y}px, 0) scaleX(${flip})`;
+
+    bee.el.style.transform =
+      `translate3d(${bee.x}px, ${bee.y}px, 0) scaleX(${flip})`;
   }
 
   function tick() {
     const now = performance.now();
 
-    if (now > queen.wanderUntil) pickWanderTarget(queen);
+    if (now > queen.wanderUntil) {
+      pickWanderTarget(queen);
+    }
+
     moveTowards(queen, queen.speed);
 
     workers.forEach((bee) => {
@@ -249,6 +288,8 @@ if (scene && !reduceMotion) {
     requestAnimationFrame(tick);
   }
 
+  pickWanderTarget(queen);
+  workers.forEach(pickWanderTarget);
+
   requestAnimationFrame(tick);
 }
-
