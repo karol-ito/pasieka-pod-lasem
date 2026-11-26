@@ -662,6 +662,20 @@ h2 {
   opacity: 0;
 }
 
+/* Zdjecia produktow w karuzeli – ograniczenie rozmiaru na komputerze i telefonie */
+.carousel-slide .product-image {
+  display: block;
+  width: 100%;
+  max-width: min(100%, 560px);
+  height: clamp(140px, 42vh, 300px);
+  max-height: 58%;
+  object-fit: contain;
+  object-position: center;
+  flex: 0 1 auto;
+  min-height: 0;
+  margin: 0 auto 0.75rem;
+}
+
 .carousel-slide .emoji {
   font-size: 3.4rem;
 }
@@ -814,24 +828,7 @@ h2 {
   .panel-split {
     flex-direction: column;
   }
-
-
-/* Zdjecia produktow w karuzeli */
-.carousel-slide .product-image {
-  display: block;
-  width: 100%;
-  max-width: 260px;
-  height: clamp(90px, 18vh, 150px);
-  max-height: 50%;
-  object-fit: contain;
-  object-position: center;
-  flex: 0 1 auto;
-  min-height: 0;
-  margin: 0 auto 8px;
-}
-
-
-  .split-row {
+.split-row {
     flex-direction: column;
   }
 
