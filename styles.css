@@ -815,6 +815,14 @@ h2 {
     flex-direction: column;
   }
 
+  .product-image {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 15px;
+}
+
   .split-row {
     flex-direction: column;
   }
