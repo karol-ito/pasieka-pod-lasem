@@ -75,13 +75,38 @@ document.querySelectorAll('.history-media').forEach((media) => {
   setInterval(() => setIndex((index + 1) % photos.length), 3500);
 });
 
-// --- Karuzela produktow (przykladowe dane) ---
+// --- Karuzela produktow ---
 const products = [
-  { emoji: '🍯', name: 'Miod lipowy', desc: 'Delikatny, kwiatowy aromat z lipowych lasow.', color: '#d9932b' },
-  { emoji: '🌾', name: 'Miod gryczany', desc: 'Intensywny, cieply smak na jesienne dni.', color: '#8a5a2b' },
-  { emoji: '🌼', name: 'Miod wielokwiatowy', desc: 'Bogactwo lakowych kwiatow w jednym sloiku.', color: '#c77d1e' },
-  { emoji: '🐝', name: 'Pierzga pszczela', desc: 'Naturalne wsparcie odpornosci prosto z ula.', color: '#b8860b' },
-  { emoji: '✨', name: 'Propolis', desc: 'Cenny produkt pszczeli o silnych wlasciwosciach.', color: '#6f4e1e' },
+  {
+    image: 'assets/Rokitnik.png',
+    name: 'Miód z rokitnikiem',
+    desc: 'Naturalny miód z dodatkiem rokitnika.',
+    color: '#d9932b'
+  },
+  {
+    emoji: '🌾',
+    name: 'Miód gryczany',
+    desc: 'Intensywny, ciepły smak na jesienne dni.',
+    color: '#8a5a2b'
+  },
+  {
+    emoji: '🌼',
+    name: 'Miód wielokwiatowy',
+    desc: 'Bogactwo łąkowych kwiatów w jednym słoiku.',
+    color: '#c77d1e'
+  },
+  {
+    emoji: '🐝',
+    name: 'Pierzga pszczela',
+    desc: 'Naturalne wsparcie prosto z ula.',
+    color: '#b8860b'
+  },
+  {
+    emoji: '✨',
+    name: 'Propolis',
+    desc: 'Cenny produkt pszczeli.',
+    color: '#6f4e1e'
+  },
 ];
 
 const track = document.getElementById('carouselTrack');
