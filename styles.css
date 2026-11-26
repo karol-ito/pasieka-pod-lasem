@@ -662,13 +662,13 @@ h2 {
   opacity: 0;
 }
 
-/* Zdjecia produktow w karuzeli – ograniczenie rozmiaru na komputerze i telefonie */
+/* Zdjęcia produktów w karuzeli */
 .carousel-slide .product-image {
   display: block;
   width: 100%;
-  max-width: min(100%, 560px);
-  height: clamp(140px, 42vh, 300px);
-  max-height: 58%;
+  max-width: 100%;
+  height: clamp(260px, 60vh, 480px);
+  max-height: 80%;
   object-fit: contain;
   object-position: center;
   flex: 0 1 auto;
